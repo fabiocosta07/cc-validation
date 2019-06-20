@@ -20,6 +20,10 @@ public class User {
     @ManyToMany
     private Set<Role> roles;
 
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<CreditCard> creditCards;
+
     public Long getId() {
         return id;
     }
@@ -58,5 +62,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<CreditCard> getCreditCards() {
+        return creditCards;
+    }
+
+    public void setCreditCards(Set<CreditCard> creditCards) {
+        this.creditCards = creditCards;
     }
 }
