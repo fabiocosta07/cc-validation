@@ -1,6 +1,8 @@
 package com.hellokoding.auth.web;
 
+import com.hellokoding.auth.model.Role;
 import com.hellokoding.auth.model.User;
+import com.hellokoding.auth.service.RoleService;
 import com.hellokoding.auth.service.SecurityService;
 import com.hellokoding.auth.service.UserService;
 import com.hellokoding.auth.validator.UserValidator;
@@ -10,10 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private SecurityService securityService;
@@ -57,5 +63,10 @@ public class UserController {
     @GetMapping({"/", "/welcome"})
     public String welcome(Model model) {
         return "welcome";
+    }
+
+    @ModelAttribute("roles")
+    public List<Role> initializeRoles() {
+        return roleService.findAll();
     }
 }
