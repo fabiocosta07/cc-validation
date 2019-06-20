@@ -65,7 +65,7 @@ public class UserController {
         return "welcome";
     }
 
-    @ModelAttribute("roles")
+    @ModelAttribute("listRoles")
     public List<Role> initializeRoles() {
         return roleService.findAll();
     }
