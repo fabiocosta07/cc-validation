@@ -3,3 +3,6 @@
 **/.mvn/*
 **/target/*
 *.iml
+*.project
+*.classpath
+**/.settings/*

@@ -16,4 +16,21 @@ public class CreditCardServiceImpl implements CreditCardService {
     public List<CreditCard> findByNumber(String number) {
         return creditCardRepository.findByNumber(number);
     }
+
+	@Override
+	public List<CreditCard> findAll() {
+		return creditCardRepository.findAll();
+	}
+
+	@Override
+	public void save(CreditCard creditCard) {
+		creditCardRepository.save(creditCard);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		creditCardRepository.deleteById(id);
+	}
+
+
 }
