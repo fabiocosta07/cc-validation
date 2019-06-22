@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +32,19 @@
 		    </div>
 		</c:if>
 
-		<h1>All Users</h1>
+        <form:form method="POST" modelAttribute="ccSearchForm" class="form-signin" action="/ccsearch">
+            <h2 class="form-signin-heading">Search Credit Card</h2>
+            <spring:bind path="number">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <form:input type="text" path="number" class="form-control" placeholder="Number"
+                                autofocus="true"></form:input>
+                    <form:errors path="number"></form:errors>
+                </div>
+            </spring:bind>
 
-		<table class="table table-striped">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        </form:form>
+        <table class="table table-striped">
 			<thead>
 				<tr>
 					<th>#ID</th>

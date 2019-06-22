@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hellokoding.auth.model.CreditCard;
-import com.hellokoding.auth.model.User;
 import com.hellokoding.auth.service.CreditCardService;
 import com.hellokoding.auth.validator.CreditCardValidator;
 
@@ -23,6 +22,7 @@ public class CreditCardController {
 	private CreditCardService creditCardService;
     @GetMapping("/ccs")
     public String listCreditCards(Model model) {
+        model.addAttribute("ccSearchForm", new CreditCard());
         model.addAttribute("ccs", creditCardService.findAll());
         return "cclist";
     }
@@ -42,7 +42,7 @@ public class CreditCardController {
         creditCardService.save(ccForm);
         return "redirect:/ccs";
     }
-    
+
 	@GetMapping(value = "/ccs/{id}/delete")
 	public String deleteUser(@PathVariable("id") long id, 
 		final RedirectAttributes redirectAttributes) {
@@ -55,5 +55,15 @@ public class CreditCardController {
 		return "redirect:/ccs";
 
 	}
+    @PostMapping("/ccsearch")
+    public String search(@ModelAttribute("ccSearchForm") CreditCard ccSearchForm, BindingResult bindingResult, Model model) {
+        creditCardValidator.validate(ccSearchForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/ccs";
+        }
+        model.addAttribute("ccs", creditCardService.findByNumber(ccSearchForm.getNumber()));
+        return "cclist";       
+    }
 
 }

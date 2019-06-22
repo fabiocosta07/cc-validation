@@ -14,7 +14,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     @Override
     public List<CreditCard> findByNumber(String number) {
-        return creditCardRepository.findByNumber(number);
+        return creditCardRepository.findByNumberContaining(number);
     }
 
 	@Override
