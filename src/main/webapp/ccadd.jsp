@@ -34,10 +34,18 @@
                 </div>
             </spring:bind>
 
-            <spring:bind path="expiryDate">
+            <spring:bind path="name">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="expiryDate" class="form-control" placeholder="Expiry Date"></form:input>
-                    <form:errors path="expiryDate"></form:errors>
+                    <form:input type="text" path="name" class="form-control" placeholder="Name on the Card"
+                                autofocus="true"></form:input>
+                    <form:errors path="name"></form:errors>
+                </div>
+            </spring:bind>
+
+            <spring:bind path="expireDate">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <form:input type="text" path="expireDate" class="form-control" placeholder="Expire Date"></form:input>
+                    <form:errors path="expireDate"></form:errors>
                 </div>
             </spring:bind>
 

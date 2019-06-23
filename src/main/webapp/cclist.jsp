@@ -47,18 +47,18 @@
         <table class="table table-striped">
 			<thead>
 				<tr>
-					<th>#ID</th>
 					<th>Number</th>
+					<th>Name</th>
+					<th>Expire Date</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 
 			<c:forEach var="cc" items="${ccs}">
 			    <tr>
-				<td>
-					${cc.id}
-				</td>
 				<td>${cc.number}</td>
+				<td>${cc.name}</td>
+				<td>${cc.expireDate}</td>
 				<td>
 				  <spring:url value="/ccs/${cc.id}/delete" var="deleteUrl" />
                   <a href="${deleteUrl}">Delete</a>

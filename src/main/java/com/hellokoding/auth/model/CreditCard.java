@@ -11,8 +11,10 @@ public class CreditCard {
     private Long id;
 
     private String number;
+    
+    private String name;
 
-    private Date expiryDate;
+    private Date expireDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -35,14 +37,6 @@ public class CreditCard {
         this.number = number;
     }
 
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
     public User getUser() {
         return user;
     }
@@ -50,4 +44,22 @@ public class CreditCard {
     public void setUser(User user) {
         this.user = user;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(Date expireDate) {
+		this.expireDate = expireDate;
+	}
+
+
 }

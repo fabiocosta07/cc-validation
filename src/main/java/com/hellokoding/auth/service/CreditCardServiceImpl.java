@@ -14,7 +14,7 @@ public class CreditCardServiceImpl implements CreditCardService {
     private CreditCardRepository creditCardRepository;
 
     @Override
-    public List<CreditCard> findByNumber(String number) {
+    public List<CreditCard> findByNumberContaining(String number) {
         return creditCardRepository.findByNumberContaining(number);
     }
 
@@ -22,10 +22,19 @@ public class CreditCardServiceImpl implements CreditCardService {
 	public List<CreditCard> findAll() {
 		return creditCardRepository.findAll();
 	}
+	
 
 	@Override
-	public void save(CreditCard creditCard) {
-		creditCardRepository.save(creditCard);
+	public void saveOrUpdate(CreditCard creditCard) {
+		final CreditCard savedCard = creditCardRepository.findByNumber(creditCard.getNumber());
+		if (savedCard != null) {
+			savedCard.setName(creditCard.getName());
+			savedCard.setExpireDate(creditCard.getExpireDate());
+			creditCardRepository.save(savedCard);
+		}
+		else 
+			creditCardRepository.save(creditCard);
+
 	}
 
 	@Override

@@ -52,7 +52,7 @@ public class CreditCardController {
         
         final User user = userService.findByUsername(authentication.getName());
         ccForm.setUser(user);
-        creditCardService.save(ccForm);
+        creditCardService.saveOrUpdate(ccForm);
         return "redirect:/ccs";
     }
 
@@ -75,7 +75,7 @@ public class CreditCardController {
         if (bindingResult.hasErrors()) {
             return "redirect:/ccs";
         }
-        model.addAttribute("ccs", creditCardService.findByNumber(ccSearchForm.getNumber()));
+        model.addAttribute("ccs", creditCardService.findByNumberContaining(ccSearchForm.getNumber()));
         return "cclist";       
     }
 
