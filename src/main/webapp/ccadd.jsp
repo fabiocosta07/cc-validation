@@ -42,10 +42,10 @@
                 </div>
             </spring:bind>
 
-            <spring:bind path="expireDate">
+            <spring:bind path="expireDateStr">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="expireDate" class="form-control" placeholder="Expire Date"></form:input>
-                    <form:errors path="expireDate"></form:errors>
+                    <form:input type="text" path="expireDateStr"  class="form-control" placeholder="Expire Date"></form:input>
+                    <form:errors path="expireDateStr"></form:errors>
                 </div>
             </spring:bind>
 

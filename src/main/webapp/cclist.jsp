@@ -58,7 +58,7 @@
 			    <tr>
 				<td>${cc.number}</td>
 				<td>${cc.name}</td>
-				<td>${cc.expireDate}</td>
+				<td><fmt:formatDate value="${cc.expireDate}" pattern="MM/yyyy" /></td>
 				<td>
 				  <spring:url value="/ccs/${cc.id}/delete" var="deleteUrl" />
                   <a href="${deleteUrl}">Delete</a>

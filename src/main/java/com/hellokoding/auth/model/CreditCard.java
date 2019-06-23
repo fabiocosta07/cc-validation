@@ -1,7 +1,15 @@
 package com.hellokoding.auth.model;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "credit_card")
@@ -13,9 +21,12 @@ public class CreditCard {
     private String number;
     
     private String name;
-
+    
     private Date expireDate;
 
+    @Transient
+    private String expireDateStr;
+    
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -47,6 +58,14 @@ public class CreditCard {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getExpireDateStr() {
+		return expireDateStr;
+	}
+
+	public void setExpireDateStr(String expireDateStr) {
+		this.expireDateStr = expireDateStr;
 	}
 
 	public void setName(String name) {
