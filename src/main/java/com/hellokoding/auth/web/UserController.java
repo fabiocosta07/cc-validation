@@ -1,25 +1,22 @@
 package com.hellokoding.auth.web;
 
-import com.hellokoding.auth.model.Role;
-import com.hellokoding.auth.model.User;
-import com.hellokoding.auth.service.RoleService;
-import com.hellokoding.auth.service.SecurityService;
-import com.hellokoding.auth.service.UserService;
-import com.hellokoding.auth.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import com.hellokoding.auth.model.User;
+import com.hellokoding.auth.service.SecurityService;
+import com.hellokoding.auth.service.UserService;
+import com.hellokoding.auth.validator.UserValidator;
 
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
 
     @Autowired
     private SecurityService securityService;
@@ -65,8 +62,4 @@ public class UserController {
         return "welcome";
     }
 
-    @ModelAttribute("listRoles")
-    public List<Role> initializeRoles() {
-        return roleService.findAll();
-    }
 }

@@ -1,6 +1,8 @@
 package com.hellokoding.auth.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,19 +13,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hellokoding.auth.model.CreditCard;
+import com.hellokoding.auth.model.User;
 import com.hellokoding.auth.service.CreditCardService;
+import com.hellokoding.auth.service.UserService;
 import com.hellokoding.auth.validator.CreditCardValidator;
 
 @Controller
 public class CreditCardController {
 	@Autowired
+	private UserService userService;
+	@Autowired
 	private CreditCardValidator creditCardValidator;
 	@Autowired
 	private CreditCardService creditCardService;
     @GetMapping("/ccs")
-    public String listCreditCards(Model model) {
+    public String listCreditCards(Model model, Authentication authentication) {
         model.addAttribute("ccSearchForm", new CreditCard());
-        model.addAttribute("ccs", creditCardService.findAll());
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN")))
+        	model.addAttribute("ccs", creditCardService.findAll());
+        else
+        	model.addAttribute("ccs", creditCardService.findByUserName(authentication.getName()));
+        	
         return "cclist";
     }
     @GetMapping("/ccs/add")
@@ -33,12 +43,15 @@ public class CreditCardController {
     }	
     
     @PostMapping("/ccs")
-    public String saveOrUpdate(@ModelAttribute("ccForm") CreditCard ccForm, BindingResult bindingResult) {
-        creditCardValidator.validate(ccForm, bindingResult);
+    public String saveOrUpdate(@ModelAttribute("ccForm") CreditCard ccForm, BindingResult bindingResult, Authentication authentication) {
+        creditCardValidator.validate(ccForm, bindingResult); 
 
         if (bindingResult.hasErrors()) {
             return "ccadd";
         }
+        
+        final User user = userService.findByUsername(authentication.getName());
+        ccForm.setUser(user);
         creditCardService.save(ccForm);
         return "redirect:/ccs";
     }

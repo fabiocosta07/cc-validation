@@ -41,15 +41,6 @@
                     <form:errors path="passwordConfirm"></form:errors>
                 </div>
             </spring:bind>
-            <spring:bind path="roles">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:select path="roles" items="${listRoles}" multiple="true" itemValue="id"
-                itemLabel="name"  class="form-control input-sm"/>
-                <form:errors path="roles"></form:errors>
-
-                </div>
-            </spring:bind>
-
             <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
         </form:form>
 

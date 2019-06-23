@@ -1,11 +1,12 @@
 package com.hellokoding.auth.service;
 
-import com.hellokoding.auth.model.CreditCard;
-import com.hellokoding.auth.repository.CreditCardRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.hellokoding.auth.model.CreditCard;
+import com.hellokoding.auth.repository.CreditCardRepository;
 
 @Service
 public class CreditCardServiceImpl implements CreditCardService {
@@ -30,6 +31,11 @@ public class CreditCardServiceImpl implements CreditCardService {
 	@Override
 	public void deleteById(Long id) {
 		creditCardRepository.deleteById(id);
+	}
+
+	@Override
+	public List<CreditCard> findByUserName(String userName) {
+		return creditCardRepository.findByUserName(userName);
 	}
 
 
