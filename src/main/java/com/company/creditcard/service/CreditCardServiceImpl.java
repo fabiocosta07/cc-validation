@@ -5,6 +5,10 @@ import java.util.List;
 import com.company.creditcard.model.CreditCard;
 import com.company.creditcard.repository.CreditCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +18,11 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     @Override
     public List<CreditCard> findByNumberContaining(String number) {
-        return creditCardRepository.findByNumberContaining(number);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN")))
+            return creditCardRepository.findByNumberContaining(number);
+        else 
+            return creditCardRepository.findByNumberContainingAndUser(number,authentication.getName());
     }
 
 	@Override
@@ -25,7 +33,9 @@ public class CreditCardServiceImpl implements CreditCardService {
 
 	@Override
 	public void saveOrUpdate(CreditCard creditCard) {
-		final CreditCard savedCard = creditCardRepository.findByNumber(creditCard.getNumber());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		final CreditCard savedCard = creditCardRepository.findByNumberAndUser(creditCard.getNumber(), authentication.getName());
+        
 		if (savedCard != null) {
 			savedCard.setName(creditCard.getName());
 			savedCard.setExpireDate(creditCard.getExpireDate());

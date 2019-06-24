@@ -71,11 +71,6 @@ public class CreditCardController {
 	}
     @PostMapping("/ccsearch")
     public String search(@ModelAttribute("ccSearchForm") CreditCard ccSearchForm, BindingResult bindingResult, Model model) {
-        creditCardValidator.validate(ccSearchForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "redirect:/ccs";
-        }
         model.addAttribute("ccs", creditCardService.findByNumberContaining(ccSearchForm.getNumber()));
         return "cclist";       
     }
