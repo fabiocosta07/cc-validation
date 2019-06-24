@@ -4,7 +4,7 @@
     <artifactId>auth</artifactId>
     <name>auth</name>
     <description>auth</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -13,7 +13,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <docker.image.prefix>company</docker.image.prefix>
+	<java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -57,7 +58,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+	</plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.9</version>
+                <configuration>
+			<repository>${docker.image.prefix}/${project.artifactId}</repository>
+			<buildArgs>
+                          <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+		        </buildArgs>
+                </configuration>
             </plugin>
+	
         </plugins>
     </build>
 </project>
