@@ -1,4 +1,4 @@
-package com.hellokoding.auth.validator;
+package com.company.creditcard.validator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,12 +6,12 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.company.creditcard.model.CreditCard;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.hellokoding.auth.model.CreditCard;
 @Component
 public class CreditCardValidator implements Validator {
 	

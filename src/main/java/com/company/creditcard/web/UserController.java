@@ -1,5 +1,8 @@
-package com.hellokoding.auth.web;
+package com.company.creditcard.web;
 
+import com.company.creditcard.model.User;
+import com.company.creditcard.service.SecurityService;
+import com.company.creditcard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hellokoding.auth.model.User;
-import com.hellokoding.auth.service.SecurityService;
-import com.hellokoding.auth.service.UserService;
-import com.hellokoding.auth.validator.UserValidator;
+import com.company.creditcard.validator.UserValidator;
 
 @Controller
 public class UserController {

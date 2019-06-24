@@ -1,8 +1,8 @@
-package com.hellokoding.auth.service;
+package com.company.creditcard.service;
 
 import java.util.List;
 
-import com.hellokoding.auth.model.CreditCard;
+import com.company.creditcard.model.CreditCard;
 
 public interface CreditCardService {
     List<CreditCard> findByNumberContaining(String number);

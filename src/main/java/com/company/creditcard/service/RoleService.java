@@ -1,6 +1,6 @@
-package com.hellokoding.auth.service;
+package com.company.creditcard.service;
 
-import com.hellokoding.auth.model.Role;
+import com.company.creditcard.model.Role;
 
 import java.util.List;
 

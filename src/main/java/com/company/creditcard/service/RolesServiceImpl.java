@@ -1,7 +1,7 @@
-package com.hellokoding.auth.service;
+package com.company.creditcard.service;
 
-import com.hellokoding.auth.model.Role;
-import com.hellokoding.auth.repository.RoleRepository;
+import com.company.creditcard.model.Role;
+import com.company.creditcard.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

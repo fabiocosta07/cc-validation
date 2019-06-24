@@ -1,6 +1,6 @@
-package com.hellokoding.auth.service;
+package com.company.creditcard.service;
 
-import com.hellokoding.auth.model.User;
+import com.company.creditcard.model.User;
 
 public interface UserService {
     void save(User user);

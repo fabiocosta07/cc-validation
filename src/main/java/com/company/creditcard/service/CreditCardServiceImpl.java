@@ -1,12 +1,11 @@
-package com.hellokoding.auth.service;
+package com.company.creditcard.service;
 
 import java.util.List;
 
+import com.company.creditcard.model.CreditCard;
+import com.company.creditcard.repository.CreditCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.hellokoding.auth.model.CreditCard;
-import com.hellokoding.auth.repository.CreditCardRepository;
 
 @Service
 public class CreditCardServiceImpl implements CreditCardService {

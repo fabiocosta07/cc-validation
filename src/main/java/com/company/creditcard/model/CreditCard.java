@@ -1,4 +1,4 @@
-package com.hellokoding.auth.model;
+package com.company.creditcard.model;
 
 import java.util.Date;
 

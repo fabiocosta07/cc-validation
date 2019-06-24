@@ -1,6 +1,6 @@
-package com.hellokoding.auth.repository;
+package com.company.creditcard.repository;
 
-import com.hellokoding.auth.model.User;
+import com.company.creditcard.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

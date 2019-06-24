@@ -1,12 +1,12 @@
-package com.hellokoding.auth.service;
+package com.company.creditcard.service;
 
+import com.company.creditcard.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.hellokoding.auth.model.User;
-import com.hellokoding.auth.repository.RoleRepository;
-import com.hellokoding.auth.repository.UserRepository;
+import com.company.creditcard.repository.RoleRepository;
+import com.company.creditcard.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
