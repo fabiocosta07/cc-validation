@@ -32,30 +32,43 @@ public class CreditCardValidator implements Validator {
 	@Override
 	public void validate(Object o, Errors errors) {
 		final CreditCard creditCard = (CreditCard)o;
-		Pattern pattern = Pattern.compile(regex);
-	    Matcher matcher = pattern.matcher(creditCard.getNumber());
-		if (!matcher.matches())
-			errors.rejectValue("number", "Invalid.ccForm.number");
-		pattern = Pattern.compile(regexExipireDate);
-	    matcher = pattern.matcher(creditCard.getExpireDateStr());
-		if (!matcher.matches())
-			errors.rejectValue("expireDateStr", "Invalid.ccForm.expireDateStr"); 
-		else {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
-			try {
-				Date expireDate = dateFormat.parse(creditCard.getExpireDateStr());
-				if (expireDate.before(new Date()))
-					errors.rejectValue("expireDateStr", "Past.ccForm.expireDateStr"); 
-				else
-				    creditCard.setExpireDate(dateFormat.parse(creditCard.getExpireDateStr()));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}	
+		Pattern pattern;
+		Matcher matcher;
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "number", "NotEmpty");		
+		if (!errors.hasFieldErrors("number")) {
+			pattern = Pattern.compile(regex);
+			matcher = pattern.matcher(creditCard.getNumber());
+			if (!matcher.matches())
+				errors.rejectValue("number", "Invalid.ccForm.number");
+			
+		}
+
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "expireDateStr", "NotEmpty");
+		if (!errors.hasFieldErrors("expireDateStr")) {
+			pattern = Pattern.compile(regexExipireDate);
+		    matcher = pattern.matcher(creditCard.getExpireDateStr());
+			if (!matcher.matches())
+				errors.rejectValue("expireDateStr", "Invalid.ccForm.expireDateStr"); 
+			else {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
+				try {
+					Date expireDate = dateFormat.parse(creditCard.getExpireDateStr());
+					if (expireDate.before(new Date()))
+						errors.rejectValue("expireDateStr", "Past.ccForm.expireDateStr"); 
+					else
+					    creditCard.setExpireDate(dateFormat.parse(creditCard.getExpireDateStr()));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}				
+		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
-        if (creditCard.getName().length() < 6 || creditCard.getName().length() > 32) {
-            errors.rejectValue("name", "Size.ccForm.name");
-        }		
+		if (!errors.hasFieldErrors("name")) {
+	        if (creditCard.getName().length() < 6 || creditCard.getName().length() > 32) {
+	            errors.rejectValue("name", "Size.ccForm.name");
+	        }					
+		}
 		
 	}
 
